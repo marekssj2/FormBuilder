@@ -48,22 +48,22 @@ class InputList extends Component {
 
   getDescendantIds = id => {
     const input = this.getInput(id);
-    let ids = [id]; // Co właściwie daje to id wewnątrz listy? - [id]
+    let ids = [id];
 
     if (input.children.length > 0) {
       input.children.forEach(child => {
         ids = ids.concat(this.getDescendantIds(child));
       });
     }
-    return ids; //zwracasz listę z id wszystkich inputów które są potomkami danego inputa
+    return ids;
   };
 
   deleteInputComponent = id => {
-    let inputList = this.state.inputList; //robimy kopię listy inputów
+    let inputList = this.state.inputList;
     const parentIndex = inputList.findIndex(input =>
       input.children.includes(id)
-    ); // Co tu się dzieje? wiem że szukamy w liście z wszystkimi inputami indeksum, tylko co dzieje się w tej funkcji strzałkowej? , ale czy mógł byś troszeczkę to przybliżyć?
-
+    );
+    
     this.getDescendantIds(id).forEach(id => {
       inputList = inputList.filter(input => input.id !== id);
     });
